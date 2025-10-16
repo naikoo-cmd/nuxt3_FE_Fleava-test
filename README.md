@@ -48,21 +48,6 @@ bun run dev
 
 The app will be available at http://localhost:3000 by default.
 
-## Available scripts
-These scripts are defined in package.json:
-
-- `dev` — start development server
-- `build` — build for production
-- `preview` — preview the production build locally
-- `generate` — generate static output (if configured)
-- `postinstall` — nuxt prepare
-
-Examples:
-```bash
-npm run build
-npm run preview
-```
-
 ## Configuration notes for reviewers
 - Source folder: `app/` (not the default `pages` root)
 - Runtime config (see `nuxt.config.ts`):
@@ -96,9 +81,9 @@ PORT=4000 npm run dev
 
 ## Notes
 - This project uses Nuxt 3.19.3 and Vue 3.
-- Sass embedded is included as a dev dependency if styles need it.
+- ```Sass``` embedded is included as a dev dependency if styles need it.
 
 If you want this README adjusted (more details, screenshots, or specific review checklist items), tell me what to add and I'll update it.
 
 
-Thankyou so much for your review, i hope we can make some awesome!
+Thankyou so much for your review!
