@@ -1,0 +1,106 @@
+.movies {
+
+  --gap: clamp(0.75rem, 2vw, 1.25rem);
+  /* Slightly smaller min card to allow more columns on wide screens */
+  --card-min: clamp(140px, 14vw, 200px);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min), 1fr)); // was auto-fit
+  gap: var(--gap);
+
+  /* Centered container with consistent side spacing */
+  max-width: none;          // delegate width control to parent container
+  width: 100%;
+  margin-inline: auto;      // center if parent doesn't constrain
+  padding-inline: 0;        // remove side padding from grid to avoid asymmetry
+  box-sizing: border-box;   // keep spacing consistent
+
+  /* Prevent horizontal scroll on narrow screens */
+  overflow-x: clip;
+}
+
+/* Ghost fillers are not needed with auto-fit; hide to avoid layout gaps */
+.movie--ghost { display: none !important; }
+
+/* Keep poster proportions and image behavior */
+.movie__poster {
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.movie__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.movie {
+  display: grid;
+  gap: 0.5rem;
+
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 420ms ease, transform 420ms ease;
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  &--ghost {
+    visibility: hidden;
+  }
+
+  &__poster {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    aspect-ratio: 2 / 3;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: translateZ(0);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+    }
+  }
+
+  &__rating {
+    position: absolute;
+    top: 8px; left: 8px;
+    background: rgba(0,0,0,0.7);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--text);
+  }
+
+  &__meta {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+}

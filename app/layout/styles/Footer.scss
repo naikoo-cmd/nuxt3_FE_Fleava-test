@@ -1,0 +1,71 @@
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+
+  &__nav {
+    display: flex; gap: 0.75rem; flex-wrap: wrap;
+  }
+  &__link {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    &:hover { color: var(--text); background: var(--surface-2); }
+  }
+
+  &__social {
+    display: flex; gap: 0.5rem; align-items: center;
+  }
+  &__icon {
+    color: var(--muted);
+    width: 36px; height: 32px;
+    display: grid; place-items: center;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 10px;
+    &:hover { color: var(--text); background: var(--surface-2); }
+  }
+
+  &__legal {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 0.6rem clamp(1rem, 3vw, 2rem);
+    color: var(--muted);
+    font-size: 0.9rem;
+    background: var(--surface);
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer__inner { justify-content: center; }
+  .site-footer__nav { order: 3; }
+  .site-footer__social { order: 2; }
+}

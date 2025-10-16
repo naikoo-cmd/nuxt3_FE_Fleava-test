@@ -1,0 +1,35 @@
+.tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.5rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 680px;
+
+  &__btn {
+    text-align: center;
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 800;
+
+    &:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    &.is-active {
+      color: var(--accent-contrast);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+  }
+}

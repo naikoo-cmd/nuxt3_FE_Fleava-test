@@ -1,0 +1,174 @@
+.home {
+  display: grid;
+  gap: clamp(1rem, 2vw, 2rem);
+  /* Prevent accidental horizontal scroll on wide screens */
+  overflow-x: clip;
+
+  &__hero {
+    position: relative; /* NEW: layer background */
+    /* Center and constrain width + side padding */
+    width: 100%;
+    max-width: none;         // was: 1200px; allow slideshow to use 85vw of viewport
+    margin-inline: 0;        // prevent accidental offset
+    padding-inline: 0;       // avoid asymmetric side padding
+
+    /* Tambah sedikit jarak atas agar tidak menempel top bar */
+    padding-top: clamp(0.75rem, 2vh, 1.5rem);
+
+    /* Top/bottom breathing room so it doesn't touch edges or feel full-screen */
+    padding-top: clamp(0.5rem, 1.5vh, 1.25rem);
+    margin-bottom: clamp(1rem, 2.5vh, 1.75rem);
+
+    /* Optional subtle separator under the slideshow */
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: clamp(1rem, 2vw, 2rem);
+      right: clamp(1rem, 2vw, 2rem);
+      bottom: -6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 18%, transparent), transparent);
+      pointer-events: none;
+    }
+
+    /* tighten hero-to-next section spacing slightly */
+    margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
+  }
+
+  /* NEW: full-width blurred background aligned to hero height */
+  &__hero-bg-wrap {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  &__hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(26px) saturate(1.1);
+    transform: scale(1.08);
+    opacity: 0.9;
+  }
+  /* subtle gradient to blend with page bg */
+  &__hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.35) 80%, rgba(0,0,0,0.55) 100%);
+  }
+  /* ensure slideshow sits above the blurred layer */
+  &__hero .slideshow { position: relative; z-index: 1; }
+
+  &__category-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 2vw, 2rem);
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+
+    /* tighter spacing above header for cohesion */
+    margin-bottom: 0.15rem; /* was ~0.25rem */
+  }
+
+  &__section-header {
+    margin-bottom: 0.15rem; /* slightly tighter under the header */
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 2vw, 2rem);
+
+    h2 {
+      font-size: clamp(1.25rem, 1vw + 1rem, 1.75rem);
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+  }
+
+  /* Centered, elegant tagline with soft animation */
+  &__tagline {
+    max-width: 72ch;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 2vw, 2rem);
+    margin: 0 0 clamp(0.5rem, 1.5vh, 0.75rem) 0;
+    text-align: center;
+    color: color-mix(in srgb, var(--text) 82%, transparent);
+    font-size: clamp(1rem, 0.5vw + 0.9rem, 1.125rem);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-shadow: 0 0 16px color-mix(in srgb, var(--accent) 18%, transparent);
+    justify-self: center; // ensure the grid item centers horizontally
+
+    /* slightly closer to the header to group as a unit */
+    margin: 0 0 clamp(0.35rem, 1vh, 0.6rem) 0;
+  }
+
+  /* Tagline tetap center dan rapi di semua lebar layar */
+  &__tagline {
+    text-align: center;
+    justify-self: center;
+    max-width: 72ch;
+  }
+
+  &__content {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 1280px;
+    width: 100%;
+    margin-inline: auto;                // center the grid container
+    padding-inline: clamp(1rem, 3vw, 2rem); // equal left/right spacing on all screens
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 1024px) {
+    &__content { grid-template-columns: 1fr; }
+  }
+}
+
+/* Tagline fade/slide animation */
+.tagline-enter-from,
+.tagline-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+.tagline-enter-active,
+.tagline-leave-active {
+  transition: opacity 360ms ease, transform 420ms ease;
+}
+.tagline-enter-to,
+.tagline-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* NEW: background fade transition */
+.bg-fade-enter-active,
+.bg-fade-leave-active { transition: opacity 900ms ease; } // was 500ms
+.bg-fade-enter-from,
+.bg-fade-leave-to { opacity: 0; }
+.bg-fade-enter-to,
+.bg-fade-leave-from { opacity: 1; }
+
+/* Buttons remain */
+.btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 100ms ease;
+}
+.btn:hover { background: var(--surface-2); color: var(--text); }
+.btn--active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
