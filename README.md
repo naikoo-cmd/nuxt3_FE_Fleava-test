@@ -35,11 +35,6 @@ TMDB_API_KEY=your_tmdb_api_key_here
 
 Note: the app reads `process.env.TMDB_API_KEY` (configured in `nuxt.config.ts`).
 
-Or start directly with an inline env:
-```bash
-TMDB_API_KEY=your_key_here npm run dev
-```
-
 4. Start the dev server
 ```bash
 # bun
