@@ -10,7 +10,8 @@ This repository is a small Nuxt 3 frontend used for evaluation. This README expl
 ## Requirements
 - Node.js (recommended: Node 18+)
 - Or alternatively Bun (a `bun.lock` file is present)
-- A TMDB API key (get one from https://www.themoviedb.org/documentation/api)
+- A TMDB API key is required. You can obtain it by creating an account at [The Movie Database](https://www.themoviedb.org) and generating an API key via [your API settings](https://www.themoviedb.org/settings/api). Alternatively, you may contact me if you wish to use my existing API key.
+
 
 ## Getting started (clone & run)
 
