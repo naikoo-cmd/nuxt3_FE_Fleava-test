@@ -6,10 +6,10 @@
       </div>
 
     <nav class="site-footer__nav" aria-label="Footer">
-      <NuxtLink to="/" class="site-footer__link">Beranda</NuxtLink>
-      <NuxtLink to="/popular" class="site-footer__link">Populer</NuxtLink>
-      <NuxtLink to="/top-rated" class="site-footer__link">Paling Dinilai</NuxtLink>
-      <NuxtLink to="/upcoming" class="site-footer__link">Segera Tayang</NuxtLink>
+      <NuxtLink to="/" class="site-footer__link">Home</NuxtLink>
+      <NuxtLink to="/popular" class="site-footer__link">Popular</NuxtLink>
+      <NuxtLink to="/top-rated" class="site-footer__link">Top rated</NuxtLink>
+      <NuxtLink to="/upcoming" class="site-footer__link">upcoming</NuxtLink>
     </nav>
 
       <div class="site-footer__social" aria-label="Social links">

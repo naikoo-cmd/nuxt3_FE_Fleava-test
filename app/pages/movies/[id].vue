@@ -406,6 +406,162 @@ function goBack() { router.back() }
 @media (min-width: 1280px) {
   .cast { --cast-card-w: 260px; }
 }
+
+/* Mobile & tablet responsive overrides (desktop unchanged) */
+@media (max-width: 1023px) {
+  .movie-detail {
+    gap: clamp(0.75rem, 2.5vw, 1.25rem);
+    padding-bottom: clamp(0.75rem, 3vh, 1.25rem);
+    overflow-x: clip; /* avoid accidental horizontal scroll */
+  }
+  .movie-detail__inner {
+    grid-template-columns: 1fr;              /* stack poster + content */
+    padding: clamp(0.75rem, 3vw, 1.25rem);
+  }
+  .movie-detail__poster {
+    max-width: min(80vw, 360px);
+    margin-inline: auto;
+  }
+
+  .movie-detail__title {
+    font-size: clamp(1.1rem, 1.2vw + 1rem, 1.6rem);
+    line-height: 1.2;
+  }
+  .movie-detail__overview {
+    font-size: clamp(0.95rem, 0.6vw + 0.85rem, 1.05rem);
+  }
+  .movie-detail__actions {
+    gap: 0.4rem;
+  }
+  .facts { font-size: 0.95rem; }
+
+  /* Top Billed Cast: names only on small screens, wrap neatly */
+  .cast {
+    display: grid !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: unset !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+    padding-inline: 0;
+    overflow: visible !important; /* no horizontal scroll */
+  }
+  .cast__item {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .cast__item img {
+    display: none !important;  /* hide images on small screens */
+  }
+  .cast__meta strong { font-size: 0.95rem; }
+  .cast__meta span   { font-size: 0.85rem; }
+
+  /* Trailer modal: keep 16:9 and fit viewport */
+  .modal__dialog {
+    width: min(96vw, 820px);
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+  }
+}
+
+/* Mobile & tablet only: center cast grid, balance side paddings, equal item width */
+@media (max-width: 1023px) {
+  .movie-detail__panel--cast-inline { /* keep the section centered */
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .cast {
+    /* grid (names-only) stays; center within container and balance sides */
+    display: grid !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: unset !important;
+
+    /* 2 columns on small tablets, equal width */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+
+    /* symmetric, responsive side padding */
+    padding-inline: clamp(0.75rem, 4vw, 1.25rem);
+    margin-inline: auto;
+
+    /* avoid accidental horizontal overflow */
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip !important;
+    justify-content: center;  /* center tracks if narrower than container */
+    justify-items: stretch;   /* items fill their grid column */
+    align-items: stretch;
+  }
+
+  .cast__item {
+    /* equal width per column; no max-width clamping from desktop rules */
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+
+    /* compact spacing for small screens */
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    margin-inline: 0;         /* prevent uneven side gaps */
+  }
+
+  .cast__item img {
+    display: none !important; /* names-only on small screens */
+  }
+
+  .cast__meta { min-width: 0; } /* allow proper ellipsis */
+  .cast__meta strong { font-size: 0.95rem; }
+  .cast__meta span   { font-size: 0.85rem; }
+}
+
+@media (max-width: 640px) {
+  .cast { grid-template-columns: 1fr; }      /* single column on phones */
+  .movie-detail__title { font-size: clamp(1rem, 4vw, 1.35rem); }
+  .movie-detail__overview { font-size: clamp(0.9rem, 3.2vw, 1rem); }
+  .modal__dialog { width: 96vw; aspect-ratio: 16 / 9; }
+}
+
+/* Back button: mobile/tablet fixes (desktop unchanged) */
+@media (max-width: 1023px) {
+  /* allow sticky button to be visible (was clipped) */
+  .movie-detail__hero { overflow: visible; }
+
+  .back-btn--poster {
+    /* avoid absolute overlay on small screens */
+    position: sticky;
+    /* keep below header (sticky, z:50) + safe area */
+    top: calc(env(safe-area-inset-top, 0px) + 60px);
+    /* align to left with consistent gutter */
+    left: auto;
+    margin-left: clamp(0.75rem, 4vw, 1.25rem);
+    margin-top: 0.25rem;
+
+    /* always on top of content but below modal */
+    z-index: 60;
+
+    /* remove overlay transforms that could hide it */
+    transform: none;
+
+    /* larger tap target (>= 40x40) */
+    min-height: 40px;
+    min-width: 40px;
+    padding: 0.45rem 0.85rem;
+
+    /* smooth hover retained by existing styles */
+  }
+}
+
+@media (max-width: 640px) {
+  .back-btn--poster {
+    /* a bit more breathing room under header on very small phones */
+    top: calc(env(safe-area-inset-top, 0px) + 64px);
+    margin-left: clamp(0.75rem, 5vw, 1rem);
+  }
+}
 </style>
 
 <style>
