@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="900" viewBox="0 0 600 900" role="img" aria-label="Poster fallback">
+  <rect width="100%" height="100%" fill="#111"/>
+  <g fill="#222">
+    <rect x="20" y="20" width="560" height="860" rx="12" />
+  </g>
+  <text x="50%" y="50%" fill="#666" font-family="Inter, Arial, sans-serif" font-size="28" text-anchor="middle" dominant-baseline="middle">
+    Poster unavailable
+  </text>
+</svg>
